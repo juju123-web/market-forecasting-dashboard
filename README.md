@@ -16,6 +16,10 @@ This project demonstrates a complete applied machine learning workflow for time-
 
 The goal is educational and technical demonstration, not investment advice.
 
+## Demo
+
+![Dashboard screenshot](assets/dashboard_screenshot.png)
+
 ## Features
 
 - Select from common tickers such as AAPL, TSLA, NVDA, SPY, QQQ, and BTC-USD.
@@ -56,7 +60,7 @@ market-forecasting-dashboard/
 ├── data/
 │   └── .gitkeep
 ├── assets/
-│   └── .gitkeep
+│   └── dashboard_screenshot.png
 └── reports/
     └── project_summary.md
 ```
