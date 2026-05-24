@@ -76,7 +76,7 @@ Baseline models include:
 - Naive forecast: future values equal the last observed value.
 - Moving average forecast: future values equal the average of the last N observations.
 
-TimesFM is integrated through a modular wrapper in `src/forecasting.py` so the forecasting pipeline remains easy to extend.
+TimesFM is integrated through a modular wrapper in `src/forecasting.py` so the forecasting pipeline remains easy to extend. The wrapper supports the newer TimesFM 2.5 style API with `TimesFM_2p5_200M_torch.from_pretrained(...)`, `ForecastConfig(...)`, and `model.forecast(horizon=..., inputs=...)`. It also keeps a fallback path for the older `TimesFm` API used by PyPI releases. If TimesFM cannot be imported or loaded in the current environment, the dashboard still runs with baseline models and displays a clear warning.
 
 ## How to Run
 
@@ -106,6 +106,14 @@ Run the dashboard:
 ```bash
 streamlit run app.py
 ```
+
+Note: TimesFM may require Python 3.10 or 3.11 plus compatible ML backend packages. On Python 3.11, the PyPI torch install path is commonly:
+
+```bash
+pip install "timesfm[torch]"
+```
+
+For the latest TimesFM 2.5 code path, follow the official Google Research repository installation instructions. If the model cannot load, the app will still run the baseline forecasts and show a clear warning.
 
 ## Evaluation Metrics
 
