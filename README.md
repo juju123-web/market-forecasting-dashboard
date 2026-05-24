@@ -29,6 +29,7 @@ Live demo: https://your-streamlit-app-url.streamlit.app
 - Run naive and moving-average baseline forecasts.
 - Integrate a TimesFM forecasting wrapper.
 - Backtest using the most recent horizon as the test period.
+- Forecast the next N business days using all available historical close prices.
 - Display MAE, RMSE, and MAPE comparison table.
 - Visualize historical data and forecasts with Plotly.
 - Download forecast results as CSV.
@@ -81,6 +82,11 @@ Baseline models include:
 
 - Naive forecast: future values equal the last observed value.
 - Moving average forecast: future values equal the average of the last N observations.
+
+The dashboard supports two modes:
+
+- Backtest Mode: reserves the most recent horizon as a test set, forecasts that period, and reports MAE, RMSE, and MAPE against actual prices.
+- Future Forecast Mode: trains each model on all available historical close prices and predicts the next selected number of business days. This mode does not report error metrics because actual future prices are not available yet.
 
 TimesFM is integrated through a modular wrapper in `src/forecasting.py` so the forecasting pipeline remains easy to extend. The wrapper supports the newer TimesFM 2.5 style API with `TimesFM_2p5_200M_torch.from_pretrained(...)`, `ForecastConfig(...)`, and `model.forecast(horizon=..., inputs=...)`. It also keeps a fallback path for the older `TimesFm` API used by PyPI releases. If TimesFM cannot be imported or loaded in the current environment, the dashboard still runs with baseline models and displays a clear warning.
 
