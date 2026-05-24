@@ -10,9 +10,10 @@ def naive_forecast(series: pd.Series, horizon: int) -> np.ndarray:
     """Forecast future values as the last observed value."""
     if horizon <= 0:
         raise ValueError("horizon must be positive.")
-    if series.empty:
+    clean_series = series.dropna().astype(float)
+    if clean_series.empty:
         raise ValueError("series cannot be empty.")
-    last_value = float(series.dropna().iloc[-1])
+    last_value = float(clean_series.iloc[-1])
     return np.repeat(last_value, horizon)
 
 
