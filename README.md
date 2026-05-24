@@ -18,6 +18,8 @@ The goal is educational and technical demonstration, not investment advice.
 
 ## Demo
 
+Live demo: https://your-streamlit-app-url.streamlit.app
+
 ![Dashboard screenshot](assets/dashboard_screenshot.png)
 
 ## Features
@@ -111,13 +113,36 @@ Run the dashboard:
 streamlit run app.py
 ```
 
-Note: TimesFM may require Python 3.10 or 3.11 plus compatible ML backend packages. On Python 3.11, the PyPI torch install path is commonly:
+## Deploy on Streamlit Community Cloud
+
+This repository is organized for Streamlit Community Cloud:
+
+- App entry point: `app.py`
+- Dependency file: `requirements.txt`
+- Target branch: `main`
+
+To deploy:
+
+1. Push the latest code to GitHub.
+2. Go to [Streamlit Community Cloud](https://streamlit.io/cloud).
+3. Create a new app from the GitHub repository.
+4. Select repository `juju123-web/market-forecasting-dashboard`.
+5. Select branch `main`.
+6. Set the main file path to `app.py`.
+7. Deploy the app and copy the generated `.streamlit.app` URL.
+8. Replace the placeholder live demo URL in this README with the deployed app URL.
+
+Streamlit Community Cloud creates a fresh Python environment for the app and installs packages from `requirements.txt`. If dependencies change, commit the updated `requirements.txt` and redeploy or reboot the app from the Streamlit Cloud dashboard.
+
+## TimesFM Compatibility Notes
+
+TimesFM may require Python 3.10 or 3.11 plus compatible ML backend packages. On Python 3.11, the PyPI torch install path is commonly:
 
 ```bash
 pip install "timesfm[torch]"
 ```
 
-For the latest TimesFM 2.5 code path, follow the official Google Research repository installation instructions. If the model cannot load, the app will still run the baseline forecasts and show a clear warning.
+For the latest TimesFM 2.5 code path, follow the official Google Research repository installation instructions. Streamlit Community Cloud resource limits and Python version availability may make real TimesFM inference unavailable or slow. This app is designed to remain usable in that case: keep `Try TimesFM forecast` unchecked, or let the app skip TimesFM and show the baseline forecasts with a clear warning.
 
 ## Evaluation Metrics
 
