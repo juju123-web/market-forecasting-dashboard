@@ -1,2 +1,130 @@
-# market-forecasting-dashboard
-Interactive financial time-series forecasting dashboard using Google TimesFM, Streamlit, and baseline model evaluation.
+# Market Forecasting Dashboard with TimesFM
+
+Interactive financial time-series forecasting dashboard using Google TimesFM, Streamlit, yfinance, Plotly, and baseline model evaluation.
+
+## Overview
+
+This project demonstrates a complete applied machine learning workflow for time-series forecasting:
+
+1. Download real historical market data.
+2. Clean and preprocess price data.
+3. Forecast future values using Google TimesFM.
+4. Compare model output against simple baseline models.
+5. Evaluate forecasts with MAE, RMSE, and MAPE.
+6. Visualize historical and predicted values in a Streamlit dashboard.
+7. Export forecast results as CSV.
+
+The goal is educational and technical demonstration, not investment advice.
+
+## Features
+
+- Select from common tickers such as AAPL, TSLA, NVDA, SPY, QQQ, and BTC-USD.
+- Download historical market data with yfinance.
+- Run naive and moving-average baseline forecasts.
+- Integrate a TimesFM forecasting wrapper.
+- Backtest using the most recent horizon as the test period.
+- Display MAE, RMSE, and MAPE comparison table.
+- Visualize historical data and forecasts with Plotly.
+- Download forecast results as CSV.
+
+## Tech Stack
+
+- Python
+- Streamlit
+- pandas
+- numpy
+- yfinance
+- Plotly
+- scikit-learn
+- TimesFM
+
+## Project Structure
+
+```text
+market-forecasting-dashboard/
+├── app.py
+├── requirements.txt
+├── README.md
+├── .gitignore
+├── src/
+│   ├── __init__.py
+│   ├── data_loader.py
+│   ├── forecasting.py
+│   ├── baselines.py
+│   ├── metrics.py
+│   └── plotting.py
+├── data/
+│   └── .gitkeep
+├── assets/
+│   └── .gitkeep
+└── reports/
+    └── project_summary.md
+```
+
+## Methodology
+
+The dashboard uses a simple backtesting setup:
+
+1. Download the full historical price series.
+2. Reserve the last `forecast horizon` observations as the test set.
+3. Use the earlier observations as the training/history set.
+4. Generate forecasts for the test period.
+5. Compare predictions with actual test values.
+
+Baseline models include:
+
+- Naive forecast: future values equal the last observed value.
+- Moving average forecast: future values equal the average of the last N observations.
+
+TimesFM is integrated through a modular wrapper in `src/forecasting.py` so the forecasting pipeline remains easy to extend.
+
+## How to Run
+
+Clone the repository:
+
+```bash
+git clone https://github.com/juju123-web/market-forecasting-dashboard.git
+cd market-forecasting-dashboard
+```
+
+Create and activate a virtual environment:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate  # macOS/Linux
+# .venv\Scripts\activate   # Windows
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run the dashboard:
+
+```bash
+streamlit run app.py
+```
+
+## Evaluation Metrics
+
+- MAE: Mean Absolute Error
+- RMSE: Root Mean Squared Error
+- MAPE: Mean Absolute Percentage Error
+
+## Limitations
+
+Financial markets are noisy, non-stationary, and affected by external events that are not captured by historical price data alone. Forecasts from this dashboard should be interpreted as model outputs for research and educational purposes only.
+
+## Future Improvements
+
+- Add confidence intervals or quantile forecasts.
+- Add ARIMA or Prophet as additional baselines.
+- Add multi-asset comparison.
+- Add rolling-window backtesting.
+- Deploy on Streamlit Community Cloud or Hugging Face Spaces.
+
+## Disclaimer
+
+This project is for educational and research purposes only. It is not financial advice. Do not use this dashboard as the sole basis for investment decisions.
